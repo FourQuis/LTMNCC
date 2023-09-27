@@ -31,11 +31,11 @@ def signin(request):
 
         user = authenticate(username=username, password=pass1)
         if user is not None:
+            my_data = user.get_username
             login(request, user)
-            return render(request, 'authentication/index.html',)
+            return render(request, 'authentication/index.html',{'my_data':my_data})
         else:
-            messages.error(request,"Bad Credentials")
-            return  redirect(home)
+            messages.error(request,'User not found')
     return render(request, "authentication/signin.html")
 def signout(request):
     logout(request)
